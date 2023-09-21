@@ -13,7 +13,7 @@ const ActionProvider = ({
   children: JSX.Element;
 }) => {
   const navigate = useNavigate();
-  // const { age } = useSelector((state: RootState) => state.user);
+  // const [countDown, setCountDown] = React.useState(5);
 
   const chatInputContainer = document.querySelector(
     '.react-chatbot-kit-chat-input-container'
@@ -61,21 +61,33 @@ const ActionProvider = ({
   const handleLast = (age: number) => {
     const userMessage = createClientMessage(age.toString(), {});
 
+    let countDown = 5;
+
     const botMessage = createChatBotMessage(
-      'Thank you. In 5 seconds, bot will exit',
+      `Thank you. In ${countDown} seconds, bot will exit`,
       {
         withAvatar: false
       }
     );
 
-    setState((prev: { messages: string }) => ({
-      ...prev,
-      messages: [...prev.messages, userMessage, botMessage]
-    }));
-
-    setTimeout(() => {
-      navigate('/thank-you');
-    }, 5000);
+    
+    const interval = setInterval(() => {
+      if (countDown === 0) {
+        clearInterval(interval);
+        
+        navigate('/thank-you');
+      } else {
+        countDown--;
+        botMessage.message = `Thank you. In ${countDown} seconds, bot will exit`;
+        setState((prev: { messages: string; }) => {          
+          const messages = countDown === 4 ? [...prev.messages, userMessage, botMessage] : [...prev.messages];
+          return {
+            ...prev,
+            messages
+          };
+        });
+      }
+    }, 1000);
   };
 
   return (
