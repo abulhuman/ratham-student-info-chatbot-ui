@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+.react-chatbot-kit-chat-container {
+  width: auto !important;
+  height: 100%;
+}
+
+.react-chatbot-kit-chat-inner-container,
+.react-chatbot-kit-chat-message-container {
+  height: 100% !important;
+  overflow: scroll;
+  padding: 0 !important;
+}
+
+.react-chatbot-kit-user-avatar-container {
+  width: 50px !important;
+  height: 50px !important;
+  padding: 0 !important;
+  margin-right: 0.75rem !important;
+  margin-left: 0.75rem !important;
+}
+
+.react-chatbot-kit-chat-bot-message {
+  margin-left: 0 !important;
+  color: black !important;
+}
+
+.react-chatbot-kit-chat-input-container {
+  /* display: none is deleting the element, I want to hide it how? */
+
+  /* display: none !important; */
+  visibility: hidden;
+}
